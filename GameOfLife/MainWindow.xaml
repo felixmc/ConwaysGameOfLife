@@ -1,0 +1,40 @@
+﻿<Window x:Class="GameOfLife.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:c="clr-namespace:GameOfLife.control"
+        Title="Conway's Game Of Life" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+	<Window.Resources>
+		<Style x:Key="Form" TargetType="StackPanel">
+			<Setter Property="Margin" Value="10" />
+		</Style>
+		<Style TargetType="Button">
+			<Setter Property="Margin" Value="0 10 0 0" />
+			<Setter Property="Height" Value="30" />
+		</Style>
+		<Style TargetType="Slider">
+			<Setter Property="Margin" Value="0 0 0 5" />
+		</Style>
+	</Window.Resources>
+	<Grid x:Name="wrapper" Height="802" Width="1052">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="250" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<StackPanel Grid.Column="0" x:Name="optionsPanel" Background="LightGray">
+			<StackPanel Style="{StaticResource Form}">
+				<c:LabeledSlider x:Name="widthSlider" Minimum="10" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="100" Label="Width" />
+				<c:LabeledSlider x:Name="heightSlider" Minimum="10" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="100" Label="Height" />
+				<Button x:Name="updateButton" Click="updateButton_Click" Content="Update Size" Margin="0 0 0 50" />
+				<c:LabeledSlider x:Name="lifeFreqSlider" Minimum=".01" Maximum=".99" IsSnapToTickEnabled="True" TickFrequency=".01" Value=".5" Label="Life Freq" />
+				<Button x:Name="randButton" Click="randButton_Click" Content="Randomize" />
+				<Button x:Name="clearButton" Click="clearButton_Click" Content="Clear" />
+				<Button x:Name="nextButton" Click="nextButton_Click" Content="Next Generation" Margin="0 50 0 0" />
+				<!--Slider Minimum="0" Maximum="2" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0 10 0 0" /-->
+				<Button x:Name="playButton" Content="Play" Click="playButton_Click" />
+			</StackPanel>
+		</StackPanel>
+		<Grid Grid.Column="1">
+			<c:ConwayGrid x:Name="gameGrid" />
+		</Grid>
+	</Grid>
+</Window>
